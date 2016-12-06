@@ -10,6 +10,8 @@ import enum
 
 @enum.unique
 class Tense(enum.Enum):
+    """An enum to represent different verb tenses."""
+
     PC = "passé composé"
     IM = "imparfait"
     PR = "présent"
