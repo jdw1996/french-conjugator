@@ -50,5 +50,5 @@ class Subject(enum.Enum):
             return pg.Gender.MASCULINE
         elif (self is Subject.ELLE) or (self is Subject.ELLES):
             return pg.Gender.FEMININE
-        else:
+        else:           # self is one of: JE, TU, ON, NOUS, VOUS
             return pg.Gender.UNKNOWN
