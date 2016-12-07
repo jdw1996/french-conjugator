@@ -89,8 +89,28 @@ class Verb:
         """Return the conjugation of the verb in imparfait with subject."""
         if self._imparfait_conjugation is not None:
             return self._imparfait_conjugation.for_subject(subject)
-        # TODO: finish
-        pass
+        stem = "ét" if (self._infinitive == "être") \
+                    else self._conjugate_present(sj.Subject.NOUS)[5:-3]
+        if (subject is not sj.Subject.NOUS) and \
+           (subject is not sj.Subject.VOUS):
+            if stem[-1] == "g":
+                stem += "e"
+            if stem[-1] == "c":
+                stem = stem[:-1] + "ç"
+        if subject is sj.Subject.JE:
+            je_form = "j'" if (stem[0] in "aeiouh") else "je "
+            return je_form + stem + "ais"
+        elif subject is sj.Subject.TU:
+            return subject.value + " " + stem + "ais"
+        elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
+             (subject is sj.Subject.ON):
+            return subject.value + " " + stem + "ait"
+        elif subject is sj.Subject.NOUS:
+            return subject.value + " " + stem + "ions"
+        elif subject is sj.Subject.VOUS:
+            return subject.value + " " + stem + "iez"
+        else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
+            return subject.value + " " + stem + "aient"
 
 
     def _conjugate_present(self, subject):
