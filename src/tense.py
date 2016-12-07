@@ -12,8 +12,8 @@ import enum
 class Tense(enum.Enum):
     """An enum to represent different verb tenses."""
 
-    PC = "passé composé"
-    IM = "imparfait"
-    PR = "présent"
-    FP = "futur proche"
-    FS = "futur simple"
+    PASSE_COMPOSE = "passé composé"
+    IMPARFAIT     = "imparfait"
+    PRESENT       = "présent"
+    FUTUR_PROCHE  = "futur proche"
+    FUTUR_SIMPLE  = "futur simple"
