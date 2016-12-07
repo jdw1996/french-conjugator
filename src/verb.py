@@ -6,6 +6,7 @@
 
 
 import helper_verbs as hv
+import plurality_and_gender as pg
 import subject as sj
 import tense as tn
 
@@ -81,8 +82,26 @@ class Verb:
         """Return the conjugation of the verb in passé composé with subject."""
         if self._passe_compose_conjugation is not None:
             return self._passe_compose_conjugation.for_subject(subject)
-        # TODO: finish
-        pass
+
+        if self._participe_passe is not None:
+            participe_passe = self._participe_passe
+        elif self._ending == "er":
+            participe_passe = self._without_ending + "é"
+        elif self._ending == "ir":
+            participe_passe = self._without_ending + "i"
+        else:           # must be "re"
+            participe_passe = self._without_ending + "u"
+
+        if self._infinitive in hv.DR_MRS_VANDERTRAMPP_VERBS:
+            agreement = ""
+            if subject.gender is pg.Gender.FEMININE:
+                agreement += "e"
+            if subject.plurality is pg.Plurality.PLURAL:
+                agreement += "s"
+            return hv.ETRE_PRESENT.for_subject(subject) + " " \
+                   + participe_passe + agreement
+        else:
+            return hv.AVOIR_PRESENT.for_subject(subject) + " " + participe_passe
 
 
     def _conjugate_imparfait(self, subject):
