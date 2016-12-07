@@ -36,6 +36,8 @@ class Verb:
 
         """
         self._infinitive = infinitive
+        self._ending = self._infinitive[-2:]
+        self._without_ending = self._infinitive[:-2]
         self._participe_passe = kwargs.get("participe_passe")
         self._futur_simple_stem = kwargs.get("futur_simple_stem")
         self._passe_compose_conjugation = \
@@ -95,8 +97,50 @@ class Verb:
         """Return the conjugation of the verb in présent with subject."""
         if self._present_conjugation is not None:
             return self._present_conjugation.for_subject(subject)
-        # TODO: finish
-        pass
+
+        je_form = "j'" if (self._without_ending[0] in "aeiouh") else "je "
+        if self._ending == "er":
+            if subject is sj.Subject.JE:
+                return je_form + self._without_ending + "e"
+            elif subject is sj.Subject.TU:
+                return subject.value + " " + self._without_ending + "es"
+            elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
+                 (subject is sj.Subject.ON):
+                return subject.value + " " + self._without_ending + "e"
+            elif subject is sj.Subject.NOUS:
+                return subject.value + " " + self._without_ending + "ons"
+            elif subject is sj.Subject.VOUS:
+                return subject.value + " " + self._without_ending + "ez"
+            else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
+                return subject.value + " " + self._without_ending + "ent"
+        elif self._ending == "ir":
+            if subject is sj.Subject.JE:
+                return je_form + self._without_ending + "is"
+            elif subject is sj.Subject.TU:
+                return subject.value + " " + self._without_ending + "is"
+            elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
+                 (subject is sj.Subject.ON):
+                return subject.value + " " + self._without_ending + "it"
+            elif subject is sj.Subject.NOUS:
+                return subject.value + " " + self._without_ending + "issons"
+            elif subject is sj.Subject.VOUS:
+                return subject.value + " " + self._without_ending + "issez"
+            else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
+                return subject.value + " " + self._without_ending + "issent"
+        else:           # must be "re"
+            if subject is sj.Subject.JE:
+                return je_form + self._without_ending + "s"
+            elif subject is sj.Subject.TU:
+                return subject.value + " " + self._without_ending + "s"
+            elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
+                 (subject is sj.Subject.ON):
+                return subject.value + " " + self._without_ending
+            elif subject is sj.Subject.NOUS:
+                return subject.value + " " + self._without_ending + "ons"
+            elif subject is sj.Subject.VOUS:
+                return subject.value + " " + self._without_ending + "ez"
+            else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
+                return subject.value + " " + self._without_ending + "ent"
 
 
     def _conjugate_futur_proche(self, subject):
