@@ -25,12 +25,9 @@ class Subject(enum.Enum):
     ELLES = "elles"     # feminine they
 
 
+    @property
     def plurality(self):
-        """Return a Plurality value indicating plurality of self.
-
-        Returns:
-            A Plurality value indicating the plurality of self.
-        """
+        """Plurality: The plurality of self."""
         if self is Subject.VOUS:
             return pg.Plurality.UNKNOWN
         elif (self is Subject.NOUS) or (self is Subject.ILS) or \
@@ -40,12 +37,9 @@ class Subject(enum.Enum):
             return pg.Plurality.SINGULAR
 
 
+    @property
     def gender(self):
-        """Return a Gender value indicating gender of self.
-
-        Returns:
-            A Gender value indicating the gender of self.
-        """
+        """Gender: The gender of self."""
         if (self is Subject.IL) or (self is Subject.ILS):
             return pg.Gender.MASCULINE
         elif (self is Subject.ELLE) or (self is Subject.ELLES):
