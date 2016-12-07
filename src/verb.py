@@ -154,5 +154,19 @@ class Verb:
         """Return the conjugation of the verb in futur simple with subject."""
         if self._futur_simple_conjugation is not None:
             return self._futur_simple_conjugation.for_subject(subject)
-        # TODO: finish
-        pass
+        stem = self._infinitive if (self._futur_simple_stem is None) \
+                                else self._futur_simple_stem
+        if subject is sj.Subject.JE:
+            je_form = "j'" if (stem[0] in "aeiouh") else "je "
+            return je_form + stem + "ai"
+        elif subject is sj.Subject.TU:
+            return subject.value + " " + stem + "as"
+        elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
+             (subject is sj.Subject.ON):
+            return subject.value + " " + stem + "a"
+        elif subject is sj.Subject.NOUS:
+            return subject.value + " " + stem + "ons"
+        elif subject is sj.Subject.VOUS:
+            return subject.value + " " + stem + "ez"
+        else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
+            return subject.value + " " + stem + "ont"
