@@ -108,6 +108,7 @@ class Verb:
         """Return the conjugation of the verb in imparfait with subject."""
         if self._imparfait_conjugation is not None:
             return self._imparfait_conjugation.for_subject(subject)
+
         stem = "ét" if (self._infinitive == "être") \
                     else self._conjugate_present(sj.Subject.NOUS)[5:-3]
         if (subject is not sj.Subject.NOUS) and \
@@ -116,6 +117,7 @@ class Verb:
                 stem += "e"
             if stem[-1] == "c":
                 stem = stem[:-1] + "ç"
+
         if subject is sj.Subject.JE:
             je_form = "j'" if (stem[0] in "aeiouh") else "je "
             return je_form + stem + "ais"
@@ -152,6 +154,7 @@ class Verb:
                 return subject.value + " " + self._without_ending + "ez"
             else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
                 return subject.value + " " + self._without_ending + "ent"
+
         elif self._ending == "ir":
             if subject is sj.Subject.JE:
                 return je_form + self._without_ending + "is"
@@ -166,6 +169,7 @@ class Verb:
                 return subject.value + " " + self._without_ending + "issez"
             else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
                 return subject.value + " " + self._without_ending + "issent"
+
         else:           # must be "re"
             if subject is sj.Subject.JE:
                 return je_form + self._without_ending + "s"
@@ -193,6 +197,7 @@ class Verb:
         """Return the conjugation of the verb in futur simple with subject."""
         if self._futur_simple_conjugation is not None:
             return self._futur_simple_conjugation.for_subject(subject)
+
         stem = self._infinitive if (self._futur_simple_stem is None) \
                                 else self._futur_simple_stem
         if subject is sj.Subject.JE:
