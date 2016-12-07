@@ -5,6 +5,7 @@
 #******************************
 
 
+import helper_verbs as hv
 import subject as sj
 import tense as tn
 
@@ -102,8 +103,7 @@ class Verb:
         """Return the conjugation of the verb in futur proche with subject."""
         if self._futur_proche_conjugation is not None:
             return self._futur_proche_conjugation.for_subject(subject)
-        # TODO: finish
-        pass
+        return hv.ALLER_PRESENT.for_subject(subject) + " " + self._infinitive
 
 
     def _conjugate_futur_simple(self, subject):
