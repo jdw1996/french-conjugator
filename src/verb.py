@@ -198,8 +198,14 @@ class Verb:
         if self._futur_simple_conjugation is not None:
             return self._futur_simple_conjugation.for_subject(subject)
 
-        stem = self._infinitive if (self._futur_simple_stem is None) \
-                                else self._futur_simple_stem
+        if self._futur_simple_stem is None:
+            if self._ending == "re":
+                stem = self._infinitive[:-1]
+            else:
+                stem = self._infinitive
+        else:
+            stem = self._futur_simple_stem
+
         if subject is sj.Subject.JE:
             je_form = "j'" if (stem[0] in "aeiouh") else "je "
             return je_form + stem + "ai"
