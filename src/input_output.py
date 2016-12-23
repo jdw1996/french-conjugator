@@ -49,7 +49,7 @@ def get_subject():
     """Get a valid French subject from console input.
 
     Returns:
-        The Subject value the user wishes to conjugate for.
+        A string representing the subject the user wishes to conjugate for.
     """
     while True:
         subject_str = input(_ENTER_SUBJECT)
