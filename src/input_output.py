@@ -6,6 +6,7 @@
 
 
 import subject as sj
+import tense as tn
 
 
 _WELCOME            = "Welcome to the French Conjugator!"
@@ -17,14 +18,25 @@ _ENTER_SUBJECT      = ("Enter the subject you would like to conjugate for\n"
                        "ils, elles): ")
 _ENTER_IS_PLURAL    = "Should the subject be treated as plural? (y/n) "
 _ENTER_IS_MASCULINE = "Should the subject be treated as masculine? (y/n) "
+_ENTER_TENSE        = "Enter the tense you would like to use, by number: "
 
 _CONJUGATION_IS     = "The conjugation of the verb is: "
 
 _INVALID_VERB       = "I'm sorry, that is not a valid French verb."
 _INVALID_SUBJECT    = "I'm sorry, that is not a valid French subject."
 _INVALID_RESPONSE   = "I'm sorry, that is not a valid response."
+_INVALID_CHOICE     = "I'm sorry, that is not a valid choice."
 
 _TRY_AGAIN          = "Would you like to conjugate another verb? (y/n) "
+
+_KNOWN_TENSES       = ("This Conjugator knows the following tenses:\n"
+                       "  0. Passé composé    3. Futur proche\n"
+                       "  1. Imparfait        4. Futur simple\n"
+                       "  2. Présent")
+
+_TENSES             = [tn.Tense.PASSE_COMPOSE, tn.Tense.IMPARFAIT,
+                       tn.Tense.PRESENT, tn.Tense.FUTUR_PROCHE,
+                       tn.Tense.FUTUR_SIMPLE]
 
 
 def welcome():
@@ -74,6 +86,21 @@ def is_masculine():
         True if subject is masculine; else False.
     """
     return _get_decision(_ENTER_IS_MASCULINE)
+
+
+def get_tense():
+    """Decide what tense to conjugate the verb in.
+
+    Returns:
+        A Tense value representing the tense to be used.
+    """
+    print(_KNOWN_TENSES)
+    while True:
+        tense_str = input(_ENTER_TENSE)
+        try:
+            return _TENSES[int(tense_str)]
+        except:
+            print(_INVALID_CHOICE)
 
 
 def output_conjugated_phrase(conjugated_phrase):
