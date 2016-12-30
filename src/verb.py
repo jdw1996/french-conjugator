@@ -139,7 +139,7 @@ class Verb:
             if stem[-1] == "c":
                 stem = stem[:-1] + "ç"
 
-        starts_with_vowel = stem[0] in "aeiouh"
+        starts_with_vowel = stem[0] in "aeéiouh"
         if self._pronominal:
             subject_string = subject.value + " " + _PRONOUNS[subject]
         else:
@@ -171,7 +171,7 @@ class Verb:
         if self._present_conjugation is not None:
             return self._present_conjugation.for_subject(subject)
 
-        starts_with_vowel = self._without_ending[0] in "aeiouh"
+        starts_with_vowel = self._without_ending[0] in "aeéiouh"
         if self._pronominal:
             subject_string = subject.value + " " + _PRONOUNS[subject]
         else:
@@ -250,7 +250,7 @@ class Verb:
         else:
             stem = self._futur_simple_stem
 
-        starts_with_vowel = stem[0] in "aeiouh"
+        starts_with_vowel = stem[0] in "aeéiouh"
         if self._pronominal:
             subject_string = subject.value + " " + _PRONOUNS[subject]
         else:
