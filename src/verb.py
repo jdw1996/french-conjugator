@@ -11,6 +11,17 @@ import subject as sj
 import tense as tn
 
 
+_PRONOUNS = { sj.Subject.JE: "me",
+              sj.Subject.TU: "te",
+              sj.Subject.IL: "se",
+              sj.Subject.ELLE: "se",
+              sj.Subject.ON: "se",
+              sj.Subject.NOUS: "nous",
+              sj.Subject.VOUS: "vous",
+              sj.Subject.ILS: "se",
+              sj.Subject.ELLES: "se" }
+
+
 class Verb:
     """A class representing a verb."""
 
@@ -36,7 +47,15 @@ class Verb:
                     the verb in futur simple.
 
         """
-        self._infinitive = infinitive
+        if infinitive[:3] == "se ":
+            self._pronominal = True
+            self._infinitive = infinitive[3:]
+        elif infinitive[:2] == "s'":
+            self._pronominal = True
+            self._infinitive = infinitive[2:]
+        else:
+            self._pronominal = False
+            self._infinitive = infinitive
         self._ending = self._infinitive[-2:]
         self._without_ending = self._infinitive[:-2]
         self._participe_passe = kwargs.get("participe_passe")
