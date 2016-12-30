@@ -237,17 +237,28 @@ class Verb:
         else:
             stem = self._futur_simple_stem
 
+        starts_with_vowel = stem[0] in "aeiouh"
+        if self._pronominal:
+            subject_string = subject.value + " " + _PRONOUNS[subject]
+        else:
+            subject_string = subject.value
+        if starts_with_vowel and subject_string[-1] == "e":
+            subject_string = subject_string[:-1] + "'"
+        else:
+            subject_string = subject_string + " "
+
+        all_but_ending = subject_string + stem
+
         if subject is sj.Subject.JE:
-            je_form = "j'" if (stem[0] in "aeiouh") else "je "
-            return je_form + stem + "ai"
+            return all_but_ending + "ai"
         elif subject is sj.Subject.TU:
-            return subject.value + " " + stem + "as"
+            return all_but_ending + "as"
         elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
              (subject is sj.Subject.ON):
-            return subject.value + " " + stem + "a"
+            return all_but_ending + "a"
         elif subject is sj.Subject.NOUS:
-            return subject.value + " " + stem + "ons"
+            return all_but_ending + "ons"
         elif subject is sj.Subject.VOUS:
-            return subject.value + " " + stem + "ez"
+            return all_but_ending + "ez"
         else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-            return subject.value + " " + stem + "ont"
+            return all_but_ending + "ont"
