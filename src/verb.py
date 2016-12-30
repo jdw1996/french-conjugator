@@ -128,8 +128,10 @@ class Verb:
         if self._imparfait_conjugation is not None:
             return self._imparfait_conjugation.for_subject(subject)
 
-        stem = "ét" if (self._infinitive == "être") \
-                    else self._conjugate_present(sj.Subject.NOUS)[5:-3]
+        if self.infinitive == "être":
+            stem = "ét"
+        else:
+            stem = self._conjugate_present(sj.Subject.NOUS).split()[-1][:-3]
         if (subject is not sj.Subject.NOUS) and \
            (subject is not sj.Subject.VOUS):
             if stem[-1] == "g":
@@ -137,20 +139,31 @@ class Verb:
             if stem[-1] == "c":
                 stem = stem[:-1] + "ç"
 
+        starts_with_vowel = stem[0] in "aeiouh"
+        if self._pronominal:
+            subject_string = subject.value + " " + _PRONOUNS[subject]
+        else:
+            subject_string = subject.value
+        if starts_with_vowel and subject_string[-1] == "e":
+            subject_string = subject_string[:-1] + "'"
+        else:
+            subject_string = subject_string + " "
+
+        all_but_ending = subject_string + stem
+
         if subject is sj.Subject.JE:
-            je_form = "j'" if (stem[0] in "aeiouh") else "je "
-            return je_form + stem + "ais"
+            return all_but_ending + "ais"
         elif subject is sj.Subject.TU:
-            return subject.value + " " + stem + "ais"
+            return all_but_ending + "ais"
         elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
              (subject is sj.Subject.ON):
-            return subject.value + " " + stem + "ait"
+            return all_but_ending + "ait"
         elif subject is sj.Subject.NOUS:
-            return subject.value + " " + stem + "ions"
+            return all_but_ending + "ions"
         elif subject is sj.Subject.VOUS:
-            return subject.value + " " + stem + "iez"
+            return all_but_ending + "iez"
         else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-            return subject.value + " " + stem + "aient"
+            return all_but_ending + "aient"
 
 
     def _conjugate_present(self, subject):
