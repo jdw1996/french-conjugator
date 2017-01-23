@@ -141,19 +141,7 @@ class Verb:
 
         all_but_ending = subject_string + stem
 
-        if subject is sj.Subject.JE:
-            return all_but_ending + "ais"
-        elif subject is sj.Subject.TU:
-            return all_but_ending + "ais"
-        elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
-             (subject is sj.Subject.ON):
-            return all_but_ending + "ait"
-        elif subject is sj.Subject.NOUS:
-            return all_but_ending + "ions"
-        elif subject is sj.Subject.VOUS:
-            return all_but_ending + "iez"
-        else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-            return all_but_ending + "aient"
+        return all_but_ending + cn.IMPARFAIT_ENDINGS[subject]
 
 
     def _conjugate_present(self, subject):
@@ -173,49 +161,11 @@ class Verb:
         all_but_ending = subject_string + self._without_ending
 
         if self._ending == "er":
-            if subject is sj.Subject.JE:
-                return all_but_ending + "e"
-            elif subject is sj.Subject.TU:
-                return all_but_ending + "es"
-            elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
-                 (subject is sj.Subject.ON):
-                return all_but_ending + "e"
-            elif subject is sj.Subject.NOUS:
-                return all_but_ending + "ons"
-            elif subject is sj.Subject.VOUS:
-                return all_but_ending + "ez"
-            else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-                return all_but_ending + "ent"
-
+            return all_but_ending + cn.PRESENT_ER_ENDINGS[subject]
         elif self._ending == "ir":
-            if subject is sj.Subject.JE:
-                return all_but_ending + "is"
-            elif subject is sj.Subject.TU:
-                return all_but_ending + "is"
-            elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
-                 (subject is sj.Subject.ON):
-                return all_but_ending + "it"
-            elif subject is sj.Subject.NOUS:
-                return all_but_ending + "issons"
-            elif subject is sj.Subject.VOUS:
-                return all_but_ending + "issez"
-            else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-                return all_but_ending + "issent"
-
+            return all_but_ending + cn.PRESENT_IR_ENDINGS[subject]
         else:           # must be "re"
-            if subject is sj.Subject.JE:
-                return all_but_ending + "s"
-            elif subject is sj.Subject.TU:
-                return all_but_ending + "s"
-            elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
-                 (subject is sj.Subject.ON):
-                return all_but_ending
-            elif subject is sj.Subject.NOUS:
-                return all_but_ending + "ons"
-            elif subject is sj.Subject.VOUS:
-                return all_but_ending + "ez"
-            else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-                return all_but_ending + "ent"
+            return all_but_ending + cn.PRESENT_RE_ENDINGS[subject]
 
 
     def _conjugate_futur_proche(self, subject):
@@ -249,17 +199,4 @@ class Verb:
             subject_string += " "
 
         all_but_ending = subject_string + stem
-
-        if subject is sj.Subject.JE:
-            return all_but_ending + "ai"
-        elif subject is sj.Subject.TU:
-            return all_but_ending + "as"
-        elif (subject is sj.Subject.IL) or (subject is sj.Subject.ELLE) or \
-             (subject is sj.Subject.ON):
-            return all_but_ending + "a"
-        elif subject is sj.Subject.NOUS:
-            return all_but_ending + "ons"
-        elif subject is sj.Subject.VOUS:
-            return all_but_ending + "ez"
-        else:       # must be one of: sj.Subject.ILS, sj.Subject.ELLES
-            return all_but_ending + "ont"
+        return all_but_ending + cn.FUTUR_SIMPLE_ENDINGS[subject]
