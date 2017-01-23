@@ -101,14 +101,15 @@ class Verb:
         else:           # must be "re"
             participe_passe = self._without_ending + "u"
 
-        if self._infinitive in hv.DR_MRS_VANDERTRAMPP_VERBS:
+        if (self._infinitive in hv.DR_MRS_VANDERTRAMPP_VERBS) \
+            or self._pronominal:
             agreement = ""
             if subject.gender is pg.Gender.FEMININE:
                 agreement += "e"
             if subject.plurality is pg.Plurality.PLURAL:
                 agreement += "s"
-            return hv.ETRE_PRESENT.for_subject(subject) + " " \
-                   + participe_passe + agreement
+            return hv.ETRE_PRESENT.for_subject(subject, self._pronominal) \
+                   + " " + participe_passe + agreement
         else:
             return hv.AVOIR_PRESENT.for_subject(subject) + " " + participe_passe
 

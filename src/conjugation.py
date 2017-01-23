@@ -7,6 +7,7 @@
 
 import enum
 
+import constants as cn
 import plurality_and_gender as pg
 import subject as sj
 
@@ -38,17 +39,16 @@ class Conjugation:
         """
         self._infinitive = infinitive
         self._tense = tense
-        je_form = "j'" if (je_conj[0] in "aeiouh") else "je "
         self._conjugations = \
-            { sj.Subject.JE:    je_form + je_conj,
-              sj.Subject.TU:    sj.Subject.TU.value + " " + tu_conj,
-              sj.Subject.IL:    sj.Subject.IL.value + " " + il_elle_on_conj,
-              sj.Subject.ELLE:  sj.Subject.ELLE.value + " " + il_elle_on_conj,
-              sj.Subject.ON:    sj.Subject.ON.value + " " + il_elle_on_conj,
-              sj.Subject.NOUS:  sj.Subject.NOUS.value + " " + nous_conj,
-              sj.Subject.VOUS:  sj.Subject.VOUS.value + " " + vous_conj,
-              sj.Subject.ILS:   sj.Subject.ILS.value + " " + ils_elles_conj,
-              sj.Subject.ELLES: sj.Subject.ELLES.value + " " + ils_elles_conj }
+            { sj.Subject.JE:    je_conj,
+              sj.Subject.TU:    tu_conj,
+              sj.Subject.IL:    il_elle_on_conj,
+              sj.Subject.ELLE:  il_elle_on_conj,
+              sj.Subject.ON:    il_elle_on_conj,
+              sj.Subject.NOUS:  nous_conj,
+              sj.Subject.VOUS:  vous_conj,
+              sj.Subject.ILS:   ils_elles_conj,
+              sj.Subject.ELLES: ils_elles_conj }
 
 
     @property
@@ -63,14 +63,24 @@ class Conjugation:
         return self._tense
 
 
-    def for_subject(self, subject):
+    def for_subject(self, subject, pronominal=False):
         """Return the conjugation of the verb for subject.
 
         Args:
             subject (Subject): The subject to return the conjugation for.
+            pronominal (boolean): True if the verb is pronominal.
 
         Returns:
             A string containing the requested conjugation, including the subject
             itself in the string.
         """
-        return self._conjugations[subject]
+        subject_string = subject.value
+        if pronominal:
+            subject_string += " " + cn.PRONOUNS[subject]
+        conjugated_verb = self._conjugations[subject]
+        starts_with_vowel = conjugated_verb[0] in "aeéiouh"
+        if starts_with_vowel and subject_string[-1] == "e":
+            subject_string = subject_string[:-1] + "'"
+        else:
+            subject_string += " "
+        return subject_string + conjugated_verb
