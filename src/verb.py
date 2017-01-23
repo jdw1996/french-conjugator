@@ -5,21 +5,11 @@
 #******************************
 
 
+import constants as cn
 import helper_verbs as hv
 import plurality_and_gender as pg
 import subject as sj
 import tense as tn
-
-
-_PRONOUNS = { sj.Subject.JE: "me",
-              sj.Subject.TU: "te",
-              sj.Subject.IL: "se",
-              sj.Subject.ELLE: "se",
-              sj.Subject.ON: "se",
-              sj.Subject.NOUS: "nous",
-              sj.Subject.VOUS: "vous",
-              sj.Subject.ILS: "se",
-              sj.Subject.ELLES: "se" }
 
 
 class Verb:
@@ -141,7 +131,7 @@ class Verb:
 
         starts_with_vowel = stem[0] in "aeéiouh"
         if self._pronominal:
-            subject_string = subject.value + " " + _PRONOUNS[subject]
+            subject_string = subject.value + " " + cn.PRONOUNS[subject]
         else:
             subject_string = subject.value
         if starts_with_vowel and subject_string[-1] == "e":
@@ -173,7 +163,7 @@ class Verb:
 
         starts_with_vowel = self._without_ending[0] in "aeéiouh"
         if self._pronominal:
-            subject_string = subject.value + " " + _PRONOUNS[subject]
+            subject_string = subject.value + " " + cn.PRONOUNS[subject]
         else:
             subject_string = subject.value
         if starts_with_vowel and subject_string[-1] == "e":
@@ -234,7 +224,7 @@ class Verb:
         if self._futur_proche_conjugation is not None:
             return self._futur_proche_conjugation.for_subject(subject)
         return hv.ALLER_PRESENT.for_subject(subject) + " " + \
-               _PRONOUNS[subject] + " " + self._infinitive
+               cn.PRONOUNS[subject] + " " + self._infinitive
 
 
     def _conjugate_futur_simple(self, subject):
@@ -252,7 +242,7 @@ class Verb:
 
         starts_with_vowel = stem[0] in "aeéiouh"
         if self._pronominal:
-            subject_string = subject.value + " " + _PRONOUNS[subject]
+            subject_string = subject.value + " " + cn.PRONOUNS[subject]
         else:
             subject_string = subject.value
         if starts_with_vowel and subject_string[-1] == "e":
