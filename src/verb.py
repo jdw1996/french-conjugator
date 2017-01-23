@@ -129,15 +129,14 @@ class Verb:
             if stem[-1] == "c":
                 stem = stem[:-1] + "ç"
 
-        starts_with_vowel = stem[0] in "aeéiouh"
+        subject_string = subject.value
         if self._pronominal:
-            subject_string = subject.value + " " + cn.PRONOUNS[subject]
-        else:
-            subject_string = subject.value
+            subject_string += " " + cn.PRONOUNS[subject]
+        starts_with_vowel = stem[0] in "aeéiouh"
         if starts_with_vowel and subject_string[-1] == "e":
             subject_string = subject_string[:-1] + "'"
         else:
-            subject_string = subject_string + " "
+            subject_string += " "
 
         all_but_ending = subject_string + stem
 
@@ -161,15 +160,14 @@ class Verb:
         if self._present_conjugation is not None:
             return self._present_conjugation.for_subject(subject)
 
-        starts_with_vowel = self._without_ending[0] in "aeéiouh"
+        subject_string = subject.value
         if self._pronominal:
-            subject_string = subject.value + " " + cn.PRONOUNS[subject]
-        else:
-            subject_string = subject.value
+            subject_string += " " + cn.PRONOUNS[subject]
+        starts_with_vowel = self._without_ending[0] in "aeéiouh"
         if starts_with_vowel and subject_string[-1] == "e":
             subject_string = subject_string[:-1] + "'"
         else:
-            subject_string = subject_string + " "
+            subject_string += " "
 
         all_but_ending = subject_string + self._without_ending
 
@@ -240,15 +238,14 @@ class Verb:
         else:
             stem = self._futur_simple_stem
 
-        starts_with_vowel = stem[0] in "aeéiouh"
+        subject_string = subject.value
         if self._pronominal:
-            subject_string = subject.value + " " + cn.PRONOUNS[subject]
-        else:
-            subject_string = subject.value
+            subject_string += " " + cn.PRONOUNS[subject]
+        starts_with_vowel = stem[0] in "aeéiouh"
         if starts_with_vowel and subject_string[-1] == "e":
             subject_string = subject_string[:-1] + "'"
         else:
-            subject_string = subject_string + " "
+            subject_string += " "
 
         all_but_ending = subject_string + stem
 
