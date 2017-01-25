@@ -61,7 +61,8 @@ def get_subject():
     """Get a valid French subject from console input.
 
     Returns:
-        A string representing the subject the user wishes to conjugate for.
+        A string representing the subject the user wishes to conjugate
+        for.
     """
     while True:
         subject_str = input(_ENTER_SUBJECT)
@@ -80,7 +81,7 @@ def is_plural():
 
 
 def is_masculine():
-    """Decide whether the subject should be treated as masculine or feminine.
+    """Decide whether the subject should be masculine or feminine.
 
     Returns:
         True if subject is masculine; else False.
@@ -132,7 +133,9 @@ def _verb_is_valid(verb_str):
 
 
 def _subject_is_valid(subject_str):
-    """Return True if subject_str is a valid French subject; else False."""
+    """
+    Return True if subject_str is a valid French subject; else False.
+    """
     try:
         subject = sj.Subject(subject_str)
         return True

@@ -22,20 +22,21 @@ class Conjugation:
         """Create an instance of the Conjugation class.
 
         Args:
-            infinitive (str): The infinitive of the verb the Conjugation is for.
+            infinitive (str): The infinitive of the verb the Conjugation
+                is for.
             tense (Tense): The tense the verb is conjugated in.
-            je_conj (str): The conjugation of the verb for "je", without the
-                subject.
-            tu_conj (str): The conjugation of the verb for "tu", without the
-                subject.
+            je_conj (str): The conjugation of the verb for "je", without
+                the subject.
+            tu_conj (str): The conjugation of the verb for "tu", without
+                the subject.
             il_elle_on_conj (str): The conjugation of the verb for
                 "il"/"elle"/"on", without the subject.
-            nous_conj (str): The conjugation of the verb for "nous", without the
-                subject.
-            vous_conj (str): The conjugation of the verb for "vous", without the
-                subject.
-            ils_elles_conj (str): The conjugation of the verb for "ils"/"elles",
+            nous_conj (str): The conjugation of the verb for "nous",
                 without the subject.
+            vous_conj (str): The conjugation of the verb for "vous",
+                without the subject.
+            ils_elles_conj (str): The conjugation of the verb for
+                "ils"/"elles", without the subject.
         """
         self._infinitive = infinitive
         self._tense = tense
@@ -71,8 +72,8 @@ class Conjugation:
             pronominal (boolean): True if the verb is pronominal.
 
         Returns:
-            A string containing the requested conjugation, including the subject
-            itself in the string.
+            A string containing the requested conjugation, including the
+            subject itself in the string.
         """
         subject_string = subject.value
         if pronominal:

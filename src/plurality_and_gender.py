@@ -10,7 +10,9 @@ import enum
 
 @enum.unique
 class Plurality(enum.Enum):
-    """An enum to indicate if something is plural, or if that is unknown."""
+    """
+    An enum to indicate if something is plural, or if that is unknown.
+    """
 
     UNKNOWN  = 0
     SINGULAR = 1
@@ -19,7 +21,9 @@ class Plurality(enum.Enum):
 
 @enum.unique
 class Gender(enum.Enum):
-    """An enum to indicate if gender is masculine, feminine, or unknown."""
+    """
+    An enum to indicate if gender is masculine, feminine, or unknown.
+    """
 
     UNKNOWN   = "x"
     MASCULINE = "m"

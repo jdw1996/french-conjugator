@@ -22,20 +22,20 @@ class Verb:
         Args:
             infinitive (str): The infinitive of the verb.
             **kwargs:
-                participe_passe (str): The participe passé for the verb.
-                futur_simple_stem (str): The stem (ending in "r") used for
-                    conjugation in futur simple.
-                passe_compose_conjugation (Conjugation): The full conjugation of
-                    the verb in passé composé.
-                imparfait_conjugation (Conjugation): The full conjugation of the
-                    verb in imparfait.
-                present_conjugation (Conjugation): The full conjugation of the
-                    verb in present tense.
-                futur_proche_conjugation (Conjugation): The full conjugation of
-                    the verb in futur proche.
-                futur_simple_conjugation (Conjugation): The full conjugation of
-                    the verb in futur simple.
-
+                participe_passe (str): The participe passé for the
+                    verb.
+                futur_simple_stem (str): The stem (ending in "r") used
+                    for conjugation in futur simple.
+                passe_compose_conjugation (Conjugation): The full
+                    conjugation of the verb in passé composé.
+                imparfait_conjugation (Conjugation): The full
+                    conjugation of the verb in imparfait.
+                present_conjugation (Conjugation): The full conjugation
+                    of the verb in present tense.
+                futur_proche_conjugation (Conjugation): The full
+                    conjugation of the verb in futur proche.
+                futur_simple_conjugation (Conjugation): The full
+                    conjugation of the verb in futur simple.
         """
         if infinitive[:3] == "se ":
             self._pronominal = True
@@ -72,8 +72,8 @@ class Verb:
             tense (Tense): The tense to conjugate the verb in.
 
         Returns:
-            A string containing the requested conjugation, including the subject
-            itself in the string.
+            A string containing the requested conjugation, including the
+            subject itself in the string.
         """
         if tense is tn.Tense.PASSE_COMPOSE:
             return self._conjugate_passe_compose(subject)
@@ -88,7 +88,10 @@ class Verb:
 
 
     def _conjugate_passe_compose(self, subject):
-        """Return the conjugation of the verb in passé composé with subject."""
+        """
+        Return the conjugation of the verb in passé composé with
+        subject.
+        """
         if self._passe_compose_conjugation is not None:
             return self._passe_compose_conjugation.for_subject(subject)
 
@@ -111,11 +114,14 @@ class Verb:
             return hv.ETRE_PRESENT.for_subject(subject, self._pronominal) \
                    + " " + participe_passe + agreement
         else:
-            return hv.AVOIR_PRESENT.for_subject(subject) + " " + participe_passe
+            return hv.AVOIR_PRESENT.for_subject(subject) + " " \
+                + participe_passe
 
 
     def _conjugate_imparfait(self, subject):
-        """Return the conjugation of the verb in imparfait with subject."""
+        """
+        Return the conjugation of the verb in imparfait with subject.
+        """
         if self._imparfait_conjugation is not None:
             return self._imparfait_conjugation.for_subject(subject)
 
@@ -145,7 +151,9 @@ class Verb:
 
 
     def _conjugate_present(self, subject):
-        """Return the conjugation of the verb in présent with subject."""
+        """
+        Return the conjugation of the verb in présent with subject.
+        """
         if self._present_conjugation is not None:
             return self._present_conjugation.for_subject(subject)
 
@@ -169,7 +177,10 @@ class Verb:
 
 
     def _conjugate_futur_proche(self, subject):
-        """Return the conjugation of the verb in futur proche with subject."""
+        """
+        Return the conjugation of the verb in futur proche with
+        subject.
+        """
         if self._futur_proche_conjugation is not None:
             return self._futur_proche_conjugation.for_subject(subject)
         return hv.ALLER_PRESENT.for_subject(subject) + " " + \
@@ -177,7 +188,10 @@ class Verb:
 
 
     def _conjugate_futur_simple(self, subject):
-        """Return the conjugation of the verb in futur simple with subject."""
+        """
+        Return the conjugation of the verb in futur simple with
+        subject.
+        """
         if self._futur_simple_conjugation is not None:
             return self._futur_simple_conjugation.for_subject(subject)
 
