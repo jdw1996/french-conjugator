@@ -24,6 +24,8 @@ class Verb:
             **kwargs:
                 participe_passe (str): The participe passé for the
                     verb.
+                imparfait_stem (str): The stem used for conjugation in
+                    imparfait.
                 futur_simple_stem (str): The stem (ending in "r") used
                     for conjugation in futur simple.
                 passe_compose_conjugation (Conjugation): The full
@@ -49,6 +51,7 @@ class Verb:
         self._ending = self._infinitive[-2:]
         self._without_ending = self._infinitive[:-2]
         self._participe_passe = kwargs.get("participe_passe")
+        self._imparfait_stem = kwargs.get("imparfait_stem")
         self._futur_simple_stem = kwargs.get("futur_simple_stem")
         self._passe_compose_conjugation = \
             kwargs.get("passe_compose_conjugation")
@@ -125,8 +128,8 @@ class Verb:
         if self._imparfait_conjugation is not None:
             return self._imparfait_conjugation.for_subject(subject)
 
-        if self.infinitive == "être":
-            stem = "ét"
+        if self._imparfait_stem is not None:
+            stem = self._imparfait_stem
         else:
             stem = self._conjugate_present(sj.Subject.NOUS).split()[-1][:-3]
         if (subject is not sj.Subject.NOUS) and \
