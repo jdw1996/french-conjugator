@@ -2,9 +2,9 @@
 
 A Python3 program to conjugate common French verbs in different tenses.
 
-I've taken a couple of French courses at the University of Waterloo in Ontario,
-Canada, and this program is designed to conjugate common verbs in the tenses
-that I have learned so far, including:
+I've taken a couple of French courses at the
+[University of Waterloo](https://uwaterloo.ca/) and this program is designed to
+conjugate common verbs in the tenses that I have learned so far, including:
 
 * Passé composé
 * Imparfait
@@ -14,7 +14,7 @@ that I have learned so far, including:
 
 I may add more tenses as I learn them.
 
-**Currently in progress:** This program is not yet fully implemented.
+You can run the program by executing `src/main.py`.
 
 If you have any pointers you'd like to share about my code, or find any verbs
 that aren't conjugated correctly by the program, feel free to
