@@ -170,6 +170,11 @@ class Verb:
             subject_string += " "
 
         all_but_ending = subject_string + self._without_ending
+        if self._ending == "er" and subject == sj.Subject.NOUS:
+            if all_but_ending[-1] == "g":
+                all_but_ending += "e"
+            elif all_but_ending[-1] == "c":
+                all_but_ending = all_but_ending[:-1] + "ç"
 
         if self._ending == "er":
             return all_but_ending + cn.PRESENT_ER_ENDINGS[subject]
