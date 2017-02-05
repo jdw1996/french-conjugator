@@ -12,7 +12,8 @@ import tense as tn
 _WELCOME            = "Welcome to the French Conjugator!"
 _GOOD_BYE           = "Good-bye!"
 
-_ENTER_VERB         = "Enter the verb you would like to conjugate: "
+_ENTER_VERB         = ("Enter the verb you would like to conjugate, "
+                       "with all accents: ")
 _ENTER_SUBJECT      = ("Enter the subject you would like to conjugate for\n"
                        "(must be one of: je, tu, il, elle, on, nous, vous, "
                        "ils, elles): ")
