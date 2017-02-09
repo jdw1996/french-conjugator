@@ -39,6 +39,9 @@ _TENSES             = [tn.Tense.PASSE_COMPOSE, tn.Tense.IMPARFAIT,
                        tn.Tense.PRESENT, tn.Tense.FUTUR_PROCHE,
                        tn.Tense.FUTUR_SIMPLE]
 
+_BOLD               = "\033[1m"
+_UNBOLD             = "\033[21m"
+
 
 def welcome():
     """Print out a welcome message."""
@@ -111,7 +114,7 @@ def output_conjugated_phrase(conjugated_phrase):
     Args:
         conjugated_phrase (str): The conjugated phrase to output.
     """
-    print(_CONJUGATION_IS + conjugated_phrase)
+    print(_CONJUGATION_IS + _BOLD + conjugated_phrase + _UNBOLD)
 
 
 def try_again():
