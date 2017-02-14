@@ -191,8 +191,8 @@ class Verb:
         """
         if self._futur_proche_conjugation is not None:
             return self._futur_proche_conjugation.for_subject(subject)
-        return hv.ALLER_PRESENT.for_subject(subject) + " " + \
-               cn.PRONOUNS[subject] + " " + self._infinitive
+        return hv.ALLER_PRESENT.for_subject(subject, self._pronominal) + \
+               " " + cn.PRONOUNS[subject] + " " + self._infinitive
 
 
     def _conjugate_futur_simple(self, subject):
